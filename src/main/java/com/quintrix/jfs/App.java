@@ -1,10 +1,15 @@
 package com.quintrix.jfs;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
 /**
  * Hello world!
@@ -83,7 +88,7 @@ public class App {
     dogList.sort(null);
 
     for (Dog dog : dogList) {
-      System.out.println(dog);
+      // System.out.println(dog);
     }
 
     if (stateMap.get("CA") != null) {
@@ -128,5 +133,57 @@ public class App {
     carsCounter++;
 
     // System.out.println("Test Output: " + testDecimalVal);
+
+    String fileName = "quintrix.txt";
+
+    FileCreator quintrixFileCreator = new FileCreator(fileName);
+
+    File quintrixFile = quintrixFileCreator.createFile();
+
+    try { // write to file
+      FileWriter writer = new FileWriter(fileName);
+      writer.write("Quintrix Solutions");
+      writer.close();
+      System.out.println("Write operation successful");
+    } catch (IOException e) {
+      System.out.println("An error occured");
+      e.printStackTrace();
+    }
+
+    try { // read from file
+      Scanner reader = new Scanner(quintrixFile);
+      while (reader.hasNextLine()) {
+        String data = reader.nextLine();
+        System.out.println(data);
+      }
+      reader.close();
+    } catch (FileNotFoundException e) {
+      System.out.println("An error occurred.");
+      e.printStackTrace();
+    }
+
+    FileCreator defaultFileCreator = new FileCreator();
+    File defaultFile = defaultFileCreator.createFile();
+    try { // write to file
+      FileWriter writer = new FileWriter(defaultFileCreator.getFileName());
+      writer.write("default");
+      writer.close();
+      System.out.println("Write operation successful");
+    } catch (IOException e) {
+      System.out.println("An error occured");
+      e.printStackTrace();
+    }
+
+    try { // read from file
+      Scanner reader = new Scanner(defaultFile);
+      while (reader.hasNextLine()) {
+        String data = reader.nextLine();
+        System.out.println(data);
+      }
+      reader.close();
+    } catch (FileNotFoundException e) {
+      System.out.println("An error occurred.");
+      e.printStackTrace();
+    }
   }
 }
