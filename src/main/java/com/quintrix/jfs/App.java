@@ -5,11 +5,14 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * Hello world!
@@ -17,6 +20,10 @@ import java.util.Scanner;
  */
 public class App {
   public static void main(String[] args) {
+
+    TestFP testFP = (a, b) -> "1";
+
+    fpAsArg(testFP);
 
     long biggerNum = 1000L;
 
@@ -63,6 +70,12 @@ public class App {
 
     intSet.sort(null);
 
+    Predicate<Dog> p = (d) -> d.getAge() > 2;
+
+    List<Integer> evenNumbersList =
+        intSet.stream().filter(i -> i % 2 == 0).collect(Collectors.toList());
+    System.out.println(evenNumbersList);
+
     for (Integer i : intSet) {
       // System.out.println(i);
     }
@@ -85,7 +98,12 @@ public class App {
 
     dogList.add(dog4);
 
-    dogList.sort(null);
+    Collections.sort(dogList);
+
+    List<Dog> dogListFiltered =
+        dogList.stream().filter(d -> d.getAge() > 2).collect(Collectors.toList());
+
+    System.out.println(dogListFiltered);
 
     for (Dog dog : dogList) {
       // System.out.println(dog);
@@ -185,5 +203,9 @@ public class App {
       System.out.println("An error occurred.");
       e.printStackTrace();
     }
+  }
+
+  private static int fpAsArg(TestFP testFP) {
+    return 1;
   }
 }
