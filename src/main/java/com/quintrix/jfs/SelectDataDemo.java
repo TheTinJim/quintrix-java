@@ -12,8 +12,8 @@ public class SelectDataDemo {
     Statement selectStmt = null;
     try {
       Class.forName("com.mysql.cj.jdbc.Driver");
-      connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/JDBCDemo", "root",
-          "MountSaintHelens1");
+      connection =
+          DriverManager.getConnection("jdbc:mysql://localhost:3306/JDBCDemo", "root", "password");
 
 
       insertStmt = connection.createStatement();
